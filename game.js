@@ -1,6 +1,8 @@
 // game object
 let game = {
   score: 0,
+  level: 1,
+  health: 100,
   color: 0,
   targets: [],
   shots: [],
@@ -16,13 +18,22 @@ function startGame() {
   shooter.update()
   setInterval(() => {
     createTarget();
-  }, 2000);
+  }, 2000 - game.level * 200);
   setInterval(() => {
     collision()
-  }, 10);
+    console.log('collision check!')
+  }, 1);
   setInterval(() => {
     scoreUpdate()
+    if(game.health <  0) {
+      gameOver()
+    }
   }, 1000);
+  setInterval(() => {
+    game.level += 1
+    damage()
+    levelUpdate()
+  }, 20000);
 }      
 
 // get next color
@@ -89,10 +100,10 @@ function addShooter(size, color, x, y) {
     this.clear()
     switch(direction) {
       case 'left':
-        this.x -= 15;
+        this.x -= 25;
         break;
       case 'right':
-        this.x += 15;
+        this.x += 25;
         break;
     }
     this.update()
@@ -108,7 +119,7 @@ function addShooter(size, color, x, y) {
     let shot = {
       radius: 10,
       y: this.y,
-      x: this.x
+      x: this.x,
     }
     async function bulletLogic(){
       await setInterval(() => {
@@ -176,11 +187,32 @@ function destroyed(target) {
   }
 }
 
-
 // update score
 function scoreUpdate() {
-  let score = document.getElementById('score')
+  let score = document.getElementById('score');
   score.innerHTML = 'Score: ' + game.score
+}
+
+// update level
+function levelUpdate() {
+  let level = document.getElementById('level');
+  level.innerHTML = 'Level: ' + game.level
+}
+
+// health damage
+function damage() {
+  game.health -= (game.targets.length - game.destroyed.length)
+  let health = document.getElementById('health');
+  if(game.health < 0){
+    health.innerHTML = 'Health: ' + 0;
+  } else {
+    health.innerHTML = 'Health: ' + game.health
+  }
+}
+
+// game over
+function gameOver() {
+  alert('game over!')
 }
 
 // resize canvas

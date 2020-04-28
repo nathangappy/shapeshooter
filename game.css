@@ -10,10 +10,6 @@ body {
   overflow: hidden;
 }
 
-.game {
-
-}
-
 .game__console {
   height: 199px;
   background-color: transparent;
@@ -32,6 +28,12 @@ body {
   align-items: center;
 }
 
+.stats {
+  display:;
+}
+
 .scoreboard p {
   font-size: 2rem;
+  margin-left: 2rem;
+  display: inline-block;
 }
