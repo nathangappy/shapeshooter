@@ -2,12 +2,90 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Play', sans-serif;
 }
 
 html,
 body {
   height: 100vh;
   overflow: hidden;
+}
+
+/* Start Screen Styles */
+.welcome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: lightsteelblue;
+  z-index: 10;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+  color: #333;
+}
+
+.welcome__info {
+  height: 100vh;
+  border: 15px solid #e65a3a;
+  padding: 2.5rem;
+}
+
+.welcome__title {
+  margin: 0 auto 2rem auto;
+  font-size: 5rem;
+  width: 60%;
+  letter-spacing: 3px;
+  text-align: center;
+  border-bottom: 5px solid #333;
+}
+
+.welcome__description {
+  margin-bottom: 5rem;
+  font-size: 2rem;
+  text-align: center;
+}
+
+.welcome__instructions {
+  margin: 7rem auto 7rem auto;
+  list-style: none;
+  font-size: 1.5rem;
+  width: 50%;
+}
+
+.welcome__instructions p {
+  /* border-top: 2px solid #333; */
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.welcome__instructions li {
+  margin: 1.75rem 0;
+  letter-spacing: 2px;
+}
+
+.welcome__play {
+  display: block;
+  margin: 0 auto;
+  font-size: 3.5rem;
+  background-color: #e65a3a;
+  border: none;
+  padding: 1rem 2rem;
+  transition: 0.4s;
+}
+
+.welcome__play:hover {
+  transform: scale(1.1);
+  background-color: #333;
+  color: #fff;
+}
+
+
+/* Game Styles */
+.game {
+  background-color: lightsteelblue;
+  z-index: 100;
 }
 
 .game__console {
@@ -28,8 +106,27 @@ body {
   align-items: center;
 }
 
-.stats {
-  display:;
+.divider {
+  position: fixed;
+  display: block;
+  bottom: 200px;
+  left: 0;
+  height: 5px;
+  width: 100%;
+  background-color: black;
+}
+
+.mute {
+  position: fixed;
+  display: block;
+  right: 0;
+  bottom: 0;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 1.2rem;
+  padding: 10px;
+  z-index: 25;
 }
 
 .scoreboard p {

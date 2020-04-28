@@ -3,13 +3,27 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://fonts.googleapis.com/css2?family=Play&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./game.css" />
     <title>Game</title>
   </head>
   <body>
+    <div class="welcome" id='welcome'>
+      <div class="welcome__info">
+        <h1 class="welcome__title">Shapeshooter</h1>
+        <p class="welcome__description">Destroy as many circles as you can before you run out of health</p>
+        <ul class="welcome__instructions">
+          <p>Instructions</p>
+          <li>1. Use the left and right arrow keys to move your shooter left & right</li>
+          <li>2. Use the spacebar to destroy targets by shooting space missiles from your shooter</li>
+          <li>3. Your health is damaged at the end of every level. The more targets on the screen at the end of each level, the more damage you take.</li>
+          <li>4. You accumulate score points for each target you take out.</li>
+        </ul>
+        <button class="welcome__play" id='play'>Play Now</button>
+      </div>
+    </div>
     <div class="game">
       <canvas id="canvas"></canvas>
-      <!-- <div class="game__console"></div> -->
     </div>
     <div class="scoreboard">
       <h1>Shapeshooter</h1>
@@ -19,6 +33,9 @@
         <p id='score'>Score: 0</p>
       </div>
     </div>
+    <span class='divider'></span>
+    <button class="mute" id='muteButton'>Mute Audio</button>
   </body>
+  <audio src="./audio/Tetris 99 - Main Theme.mp3" autoplay loop id='audio' controls></audio>
   <script src="./game.js"></script>
 </html>

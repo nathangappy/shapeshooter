@@ -1,6 +1,7 @@
 // game object
 let game = {
   score: 0,
+  speed: 2000,
   level: 1,
   health: 100,
   color: 0,
@@ -14,26 +15,25 @@ let shooter = new addShooter(30, 'black', window.innerWidth / 2, window.innerHei
 
 // start game function
 function startGame() {
+  let welcome = document.getElementById('welcome');
+  welcome.style.display = 'none'
   resizeCanvas();
   shooter.update()
-  setInterval(() => {
-    createTarget();
-  }, 2000 - game.level * 200);
-  setInterval(() => {
-    collision()
-    console.log('collision check!')
-  }, 1);
+  // add targets & update score
   setInterval(() => {
     scoreUpdate()
     if(game.health <  0) {
       gameOver()
     }
-  }, 1000);
+    createTarget();
+  }, game.speed);
+  // change level
   setInterval(() => {
-    game.level += 1
     damage()
     levelUpdate()
-  }, 20000);
+    speed()
+    game.level += 1
+  }, 10000);
 }      
 
 // get next color
@@ -110,7 +110,7 @@ function addShooter(size, color, x, y) {
   }
   // function for clearing shooter from canvas
   this.clear = function() {
-    ctx.clearRect(this.x - 35, this.y - 35, 50 * Math.PI, 50 * Math.PI);
+    ctx.clearRect(this.x - 35, this.y - 35, 30 * Math.PI, 30 * Math.PI);
   }
   // function for shooting weapon
   this.shoot = function async() {
@@ -137,6 +137,7 @@ function addShooter(size, color, x, y) {
         ctx.stroke();
         ctx.fill();
         ctx.stroke(); 
+        collision()
         shot.y-=50
         }, 100);
       } 
@@ -167,8 +168,8 @@ function collision() {
   const ctx = canvas.getContext('2d');
   game.targets.forEach(target => {
     game.shots.forEach(shot => {
-      let dx = target.x - shot.x;
-      let dy = target.y - shot.y;
+      let dx = shot.x - target.x;
+      let dy = shot.y - target.y;
       let distance = Math.sqrt(dx * dx + dy * dy);
       if (distance < target.radius + shot.radius){
         ctx.clearRect(target.x - 35, target.y - 35, 21 * Math.PI, 21 * Math.PI);
@@ -201,12 +202,31 @@ function levelUpdate() {
 
 // health damage
 function damage() {
-  game.health -= (game.targets.length - game.destroyed.length)
+  game.health -= 2 * (game.targets.length - game.destroyed.length)
   let health = document.getElementById('health');
   if(game.health < 0){
     health.innerHTML = 'Health: ' + 0;
   } else {
     health.innerHTML = 'Health: ' + game.health
+  }
+}
+
+// game speed
+function speed() {
+  if(game.speed > 100){
+    game.speed -= 100
+  }
+}
+
+
+
+function muteAudio() {
+  let audio = document.getElementById('audio')
+  audio.muted = !audio.muted
+  if(audio.muted === true){
+    mute.innerHTML = 'Play Audio'
+  } else {
+    mute.innerHTML = 'Mute Audio'
   }
 }
 
@@ -223,5 +243,11 @@ function resizeCanvas() {
   window.addEventListener('keydown', moveShooter, true)
 }
   
-// start the game
-startGame();
+// Event Listeners ------------------------------------------------------
+// mute audio button
+let mute = document.getElementById('muteButton');
+mute.addEventListener('click', muteAudio)
+
+// play game button
+let play = document.getElementById('play');
+play.addEventListener('click', startGame);
