@@ -7,7 +7,11 @@ let game = {
   color: 0,
   targets: [],
   shots: [],
-  destroyed: []
+  destroyed: [],
+  timer1: '',
+  timer2: '',
+  timer3: '',
+  timer4: ''
 }
 
 // player object
@@ -15,20 +19,15 @@ let shooter = new addShooter(30, 'black', window.innerWidth / 2, window.innerHei
 
 // start game function
 function startGame() {
-  let welcome = document.getElementById('welcome');
-  welcome.style.display = 'none'
   resizeCanvas();
   shooter.update()
   // add targets & update score
-  setInterval(() => {
-    scoreUpdate()
-    if(game.health <  0) {
-      gameOver()
-    }
+  game.timer1 = setInterval(() => {
     createTarget();
+    console.log(game.speed)
   }, game.speed);
   // change level
-  setInterval(() => {
+  game.timer2 = setInterval(() => {
     damage()
     levelUpdate()
     speed()
@@ -122,11 +121,11 @@ function addShooter(size, color, x, y) {
       x: this.x,
     }
     async function bulletLogic(){
-      await setInterval(() => {
+      game.timer3 = await setInterval(() => {
         game.shots.shift()
         ctx.clearRect(shot.x - 15, shot.y - 65, 10 * Math.PI, 10 * Math.PI);
       }, 100);
-      await setInterval(() => { 
+      game.timer4 = await setInterval(() => { 
         if(shot.y > 0) {
           game.shots.push({x:shot.x, y:shot.y, radius: shot.radius}) 
         }
@@ -174,6 +173,7 @@ function collision() {
       if (distance < target.radius + shot.radius){
         ctx.clearRect(target.x - 35, target.y - 35, 21 * Math.PI, 21 * Math.PI);
         destroyed(target)
+        scoreUpdate()
       }
     })
   })
@@ -206,6 +206,7 @@ function damage() {
   let health = document.getElementById('health');
   if(game.health < 0){
     health.innerHTML = 'Health: ' + 0;
+    gameOver()
   } else {
     health.innerHTML = 'Health: ' + game.health
   }
@@ -232,7 +233,46 @@ function muteAudio() {
 
 // game over
 function gameOver() {
-  alert('game over!')
+  let gameoverScore = document.getElementById('gameover-score')
+  gameoverScore.innerHTML = 'Your Score: ' + game.score
+  let gameover = document.getElementById('gameover');
+  gameover.style.display = 'flex'
+  // clear all game intervals
+  clearInterval(game.timer1)
+  clearInterval(game.timer2)
+  clearInterval(game.timer3)
+  clearInterval(game.timer4)
+}
+
+// play game
+function playGame() {
+  let welcome = document.getElementById('welcome');
+  welcome.style.display = 'none'
+  startGame()
+  
+}
+
+// play again * reset game state
+function playAgain() {
+  game = {
+    score: 0,
+    speed: 2000,
+    level: 1,
+    health: 100,
+    color: 0,
+    targets: [],
+    shots: [],
+    destroyed: []
+  }
+  let gameover = document.getElementById('gameover');
+  gameover.style.display = 'none'
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0,0,window.innerWidth,window.innerHeight);
+  levelUpdate()
+  scoreUpdate()
+  damage()
+  startGame()
 }
 
 // resize canvas
@@ -250,4 +290,7 @@ mute.addEventListener('click', muteAudio)
 
 // play game button
 let play = document.getElementById('play');
-play.addEventListener('click', startGame);
+play.addEventListener('click', playGame);
+
+let gameoverPlayAgain = document.getElementById('gameover-play')
+gameoverPlayAgain.addEventListener('click', playAgain)
