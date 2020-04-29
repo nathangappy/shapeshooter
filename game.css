@@ -290,11 +290,6 @@ audio {
     margin-left: 1rem;
     display: inline-block;
   }
-  
-
-  .stats p {
-    font-size: 1.8rem;
-  }
 
   /* Game Over Styles */
   .gameover {
