@@ -248,6 +248,13 @@ audio {
     padding: 0rem;
   }
 
+  .scoreboard p {
+    font-size: 1.5rem;
+    margin-left: 1rem;
+    display: inline-block;
+  }
+  
+
   .stats p {
     font-size: 1.8rem;
   }
@@ -255,6 +262,7 @@ audio {
   /* Game Over Styles */
   .gameover {
     border: 10px solid #e65a3a;
+    align-items: flex-start;
   }
 
   .gameover__stats {
