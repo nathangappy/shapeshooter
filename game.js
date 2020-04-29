@@ -12,21 +12,20 @@ let game = {
   timer2: '',
   timer3: '',
   timer4: '',
-  music: false
+  music: false,
+  mobileControls: false
 }
 
 // player object
-let shooter = new addShooter(30, 'black', window.innerWidth / 2, window.innerHeight - 100)
+let shooter = new addShooter(30, 'black', window.innerWidth / 2, window.innerHeight - 150)
 
 // start game function
 function startGame() {
-  console.log(window)
   resizeCanvas();
   shooter.update()
   // add targets & update score
   game.timer1 = setInterval(() => {
     createTarget();
-    console.log(game.speed)
   }, game.speed);
   // change level
   game.timer2 = setInterval(() => {
@@ -161,7 +160,7 @@ function moveShooter(evt) {
       shooter.shoot()
       break;
       }
-    }
+  }
     
 // collision detection
 function collision() {
@@ -242,7 +241,7 @@ function playGame() {
   
 }
 
-// play again * reset game state
+// play again and reset game state
 function playAgain() {
   game = {
     score: 0,
@@ -270,7 +269,20 @@ function resizeCanvas() {
   let canvas = document.getElementById('canvas');
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  mobileControlsCheck(canvas.width)
   window.addEventListener('keydown', moveShooter, true)
+}
+
+// mobile controls
+function mobileControlsCheck(width) {
+  let controls = document.getElementById('mobileControls')
+  if(width < 700){
+    game.mobileControls = true
+    controls.style.display = 'flex'
+  } else {
+    controls.style.display = 'none'
+    game.mobileControls = false
+  }
 }
 
 // play audio
@@ -287,6 +299,20 @@ function toggleAudio() {
     playAudioButton.innerHTML = 'Play Audio'
   }
 }
+
+// mobile shoot
+function mobileShoot() {
+  console.log('shoot')
+      shooter.shoot()
+}
+// mobile left
+function mobileLeft() {
+  shooter.move('left')
+}
+// mobile right
+function mobileRight() {
+  shooter.move('right')
+}
   
 // Event Listeners ------------------------------------------------------
 // mute audio button
@@ -297,5 +323,18 @@ playAudioButton.addEventListener('click', toggleAudio);
 let play = document.getElementById('play');
 play.addEventListener('click', playGame);
 
+// play again button
 let gameoverPlayAgain = document.getElementById('gameover-play')
 gameoverPlayAgain.addEventListener('click', playAgain)
+
+// trigger
+let trigger = document.getElementById('trigger')
+trigger.addEventListener('click', mobileShoot)
+
+// left
+let left = document.getElementById('left')
+left.addEventListener('click', mobileLeft)
+
+// right
+let right = document.getElementById('right')
+right.addEventListener('click', mobileRight)

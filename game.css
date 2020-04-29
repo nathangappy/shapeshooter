@@ -131,12 +131,49 @@ audio {
   font-size: 1.2rem;
   padding: 10px;
   z-index: 25;
+  display: none;
 }
 
 .scoreboard p {
   font-size: 2rem;
   margin-left: 2rem;
   display: inline-block;
+}
+
+.controls {
+  position: fixed;
+  bottom: 10px;
+  left: 0;
+  z-index: 5;
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.movement {
+  height: auto;
+  display: block;
+}
+
+.trigger {
+  margin-left: 10px;
+  padding: 1rem;
+  background-color: black;
+  display: flex;
+  align-items: center;
+}
+
+
+.left,
+.right {
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  margin: 0 10px;
+  background-color: #000;
+  border: 2px solid black;
 }
 
 /* Game Over Screen Styles */
