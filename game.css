@@ -45,16 +45,17 @@ audio {
 }
 
 .welcome__description {
+  width: 100%;
   margin-bottom: 5rem;
   font-size: 2rem;
   text-align: center;
 }
 
 .welcome__instructions {
-  margin: 7rem auto 7rem auto;
+  margin: 5.5rem auto 5.5rem auto;
   list-style: none;
   font-size: 1.5rem;
-  width: 90%;
+  width: 100%;
 }
 
 .welcome__instructions p {
@@ -101,8 +102,8 @@ audio {
   padding: 1rem;
   top: 0;
   left: 0;
-  height: 75px;
   width: 100%;
+  height: 75px;
   background-color: #e65a3a;
   display: flex;
   justify-content: space-between;
@@ -170,10 +171,10 @@ audio {
 
 
 /* Media Queries */
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 1500px) {
   .welcome__info {
-    width: 100%;
-    padding: 1.5rem;
+    width: 60%;
+    padding: 1rem;
   }
 
   .welcome__description {
@@ -182,6 +183,86 @@ audio {
   }
 
   .welcome__instructions {
-    margin: 6rem auto;
+    margin: 3rem auto;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .welcome__info {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .welcome__description {
+    width: 100;
+    font-size: 1.7rem;
+  }
+
+  .welcome__instructions {
+    margin: 3rem auto;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  /* Welcome Screen Styles */
+  .welcome {
+    border: 10px solid #e65a3a;
+  }
+
+  .welcome__info {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .welcome__description {
+    width: 100;
+    font-size: 1.5rem;
+  }
+
+  .welcome__title {
+    font-size: 3rem;
+  }
+
+  .welcome__instructions {
+    margin: 3rem auto;
+  }
+
+  .welcome__instructions p {
+    font-size: 1.7rem;
+  }
+
+  .welcome__play {
+  font-size: 2rem;
+  }
+
+  /* Game Screen Styles */
+  .scoreboard {
+    flex-direction: column;
+    padding: 0rem;
+  }
+
+  .stats p {
+    font-size: 1.8rem;
+  }
+
+  /* Game Over Styles */
+  .gameover {
+    border: 10px solid #e65a3a;
+  }
+
+  .gameover__stats {
+    width: 100%;
+  }
+
+  .gameover__title {
+    font-size: 5rem;
+  }
+
+  .gameover__score {
+    font-size: 3rem;
+  }
+
+  .gameover__play {
+    font-size: 3rem;
   }
 }
