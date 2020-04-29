@@ -34,7 +34,6 @@
       </div>
     </div>
     <span class='divider'></span>
-    <button class="mute" id='muteButton'>Mute Audio</button>
     <div class="gameover" id='gameover'>
       <div class="gameover__stats">
         <h1 class="gameover__title">Game Over</h1>
@@ -43,6 +42,7 @@
       </div>
     </div>
   </body>
-  <audio src="./audio/Tetris 99 - Main Theme.mp3" autoplay loop id='audio'></audio>
+  <button type='button' class="mute" id='playAudio' value='Play Audio'>Play Audio</button>
+  <audio src="./audio/Tetris 99 - Main Theme.mp3" loop type="audio/mp3" id='audio'></audio>
   <script src="./game.js"></script>
 </html>

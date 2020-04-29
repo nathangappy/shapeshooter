@@ -11,6 +11,10 @@ body {
   overflow: hidden;
 }
 
+audio {
+  z-index: 100;
+}
+
 /* Start Screen Styles */
 .welcome {
   position: fixed;

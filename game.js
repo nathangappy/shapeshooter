@@ -11,7 +11,8 @@ let game = {
   timer1: '',
   timer2: '',
   timer3: '',
-  timer4: ''
+  timer4: '',
+  music: false
 }
 
 // player object
@@ -19,6 +20,7 @@ let shooter = new addShooter(30, 'black', window.innerWidth / 2, window.innerHei
 
 // start game function
 function startGame() {
+  console.log(window)
   resizeCanvas();
   shooter.update()
   // add targets & update score
@@ -219,18 +221,6 @@ function speed() {
   }
 }
 
-
-
-function muteAudio() {
-  let audio = document.getElementById('audio')
-  audio.muted = !audio.muted
-  if(audio.muted === true){
-    mute.innerHTML = 'Play Audio'
-  } else {
-    mute.innerHTML = 'Mute Audio'
-  }
-}
-
 // game over
 function gameOver() {
   let gameoverScore = document.getElementById('gameover-score')
@@ -282,11 +272,26 @@ function resizeCanvas() {
   canvas.height = window.innerHeight;
   window.addEventListener('keydown', moveShooter, true)
 }
+
+// play audio
+function toggleAudio() {
+  let audio = document.getElementById('audio');
+  let playAudioButton = document.getElementById('playAudio');
+  game.music = !game.music
+  console.log(game.music)
+  if(game.music === true){
+    audio.play()
+    playAudioButton.innerHTML = 'Stop Audio'
+  } else {
+    audio.pause()
+    playAudioButton.innerHTML = 'Play Audio'
+  }
+}
   
 // Event Listeners ------------------------------------------------------
 // mute audio button
-let mute = document.getElementById('muteButton');
-mute.addEventListener('click', muteAudio)
+let playAudioButton = document.getElementById('playAudio');
+playAudioButton.addEventListener('click', toggleAudio);
 
 // play game button
 let play = document.getElementById('play');
