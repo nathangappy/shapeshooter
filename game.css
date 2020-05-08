@@ -86,7 +86,6 @@ audio {
   color: #fff;
 }
 
-
 /* Game Styles */
 .game {
   background-color: lightsteelblue;
@@ -165,7 +164,6 @@ audio {
   align-items: center;
 }
 
-
 .left,
 .right {
   display: inline-block;
@@ -206,11 +204,10 @@ audio {
   margin-bottom: 3rem;
 }
 
-
 /* Media Queries */
 @media screen and (max-width: 1500px) {
   .welcome__info {
-    width: 60%;
+    width: 90%;
     padding: 1rem;
   }
 
@@ -219,12 +216,21 @@ audio {
     font-size: 1.7rem;
   }
 
+  .welcome__title {
+    font-size: 3.5rem;
+  }
+
   .welcome__instructions {
     margin: 3rem auto;
+    font-size: 1.1rem;
+  }
+
+  .welcome__play {
+    font-size: 3rem;
   }
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .welcome__info {
     width: 100%;
     padding: 1rem;
@@ -276,7 +282,7 @@ audio {
   }
 
   .welcome__play {
-  font-size: 1.5rem;
+    font-size: 1.5rem;
   }
 
   /* Game Screen Styles */
